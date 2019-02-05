@@ -12,4 +12,11 @@
   roles:
     - { name: basic-config }
     - { name: app-tier }
+
+- name: install postgres db
+  hosts: appdbs
+  become: true
+  roles:
+    - { name: basic-config }
+    - { name: geerlingguy.postgresql }
   
