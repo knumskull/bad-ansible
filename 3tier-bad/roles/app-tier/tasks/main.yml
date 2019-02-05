@@ -5,10 +5,9 @@
     name: "{{ package }}"
     state: latest
 
-- name: Enable and start service {{ package }}
+- name: Enable service {{ package }}
   service:
     name: "{{ package }}"
-    state: started
     enabled: yes
 
 - name: create {{ package }} directory
@@ -21,3 +20,8 @@
     src: index.html.j2
     dest: "{{ tomcat_webroot }}/index.html"
     mode: 0644
+
+- name: restart {{ package }}
+  service:
+    name: "{{ package }}"
+    state: restarted
