@@ -1,0 +1,23 @@
+---
+# tasks file for app-tier
+- name: install {{ package }}
+  yum:
+    name: "{{ package }}"
+    state: latest
+
+- name: Enable and start service {{ package }}
+  service:
+    name: "{{ package }}"
+    state: started
+    enabled: yes
+
+- name: create {{ package }} directory
+  file:
+    path: "{{ tomcat_webroot }}"
+    state: directory
+
+- name: apply static index.html to {{ package }}
+  template:
+    src: index.html.j2
+    dest: "{{ tomcat_webroot }}/index.html"
+    mode: 0644

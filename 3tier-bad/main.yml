@@ -1,0 +1,15 @@
+
+- name: Setup Frontend
+  hosts: frontends
+  become: true
+  roles:
+    - {name: basic-config}
+    - {name: haproxy}
+
+- name: setup app tier
+  hosts: apps
+  become: true
+  roles:
+    - { name: basic-config }
+    - { name: app-tier }
+  
